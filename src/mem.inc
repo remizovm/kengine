@@ -27,9 +27,7 @@ endl
                 ret
         .endif
         mov     [process_handle], eax
-        lea     ebx, [old_protection]
-
-        invoke  VirtualProtectEx, eax, [address], [payload_size], PAGE_EXECUTE_READWRITE, ebx
+        invoke  VirtualProtectEx, eax, [address], [payload_size], PAGE_EXECUTE_READWRITE, addr old_protection
         .if     eax = 0
                 invoke  CloseHandle, [process_handle]
                 ret
@@ -57,12 +55,10 @@ endl
         .endif
         mov     [hSnapshot], eax
         mov     [pe32.dwSize], sizeof.PROCESSENTRY32
-        lea     ebx, [pe32]
-        invoke  Process32First, [hSnapshot], ebx
+        invoke  Process32First, [hSnapshot], addr pe32
         .if     eax = 1
 @@:
-                lea     eax, [pe32.szExeFile]
-                stdcall strcmp, [proc_name], eax
+                stdcall strcmp, [proc_name], addr pe32.szExeFile
                 .if     eax = 0
                         mov     eax, [pe32.th32ProcessID]
                         mov     [pID], eax
