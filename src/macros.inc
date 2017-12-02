@@ -1,0 +1,1 @@
+macro .break { jmp __ENDW }
