@@ -1,3 +1,12 @@
+proc gui_clear_screen
+        mov     edi, [canvas_buffer]
+        mov     ecx, [window_width]
+        imul    ecx, [window_height]
+        xor     eax, eax
+        rep     stosd
+        ret
+endp
+
 proc gui_init, hwnd
         mov     [canvas.bmiHeader.biSize], sizeof.BITMAPINFOHEADER
         mov     eax, [window_width]

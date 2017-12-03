@@ -9,57 +9,13 @@ include 'structs.inc'
 .code
 ; main entry point
 start:
-        stdcall main
-        invoke  ExitProcess,eax
-
-; creates the main window and starts the main window loop
-proc main
-; in:  nothing
-; out: last window message status
-locals
-        ; window class structure
-        wc      WNDCLASS
-        ; window message
-        msg     MSG
-endl
-        ; fill the wc structure
-        invoke  GetModuleHandle, 0
-        mov     [wc.hInstance], eax
-        invoke  LoadCursor, 0, IDC_ARROW
-        mov     [wc.hCursor], eax
-        mov     [wc.style], 0
-        mov     [wc.lpfnWndProc], window_proc
-        mov     [wc.cbClsExtra], 0
-        mov     [wc.cbWndExtra], 0
-        mov     [wc.hIcon], 0
-        mov     [wc.hbrBackground], COLOR_BTNFACE+1
-        mov     [wc.lpszMenuName], 0
-        mov     [wc.lpszClassName], class_name
-        ; register the main window class
-        invoke  RegisterClass, addr wc
+        invoke  DialogBoxParam, <invoke  GetModuleHandle, 0>, 37, 0,\
+                                dialog_proc, 0
         ; TODO: check error
-        ; reate the main window.
-        invoke  CreateWindowEx, 0, class_name, "kengine", \
-                                WS_VISIBLE+WS_POPUP+WS_SYSMENU, 128, 128,\
-                                [window_width], [window_height], NULL, NULL,\
-                                [wc.hInstance], NULL
-        ; TODO: check error
-        ; main window message loop
-        .while
-                invoke  GetMessage, addr msg, 0, 0, 0
-                .if     eax = 0
-                        .break
-                .endif
-                invoke  TranslateMessage, addr msg
-                invoke  DispatchMessage, addr msg
-        .endw
-        ; place the return value to eax
-        mov     eax, [msg.message]
-        ret
-endp
+        invoke  ExitProcess,0
 
 include 'helpers.inc'
-include 'wndproc.inc'
+include 'dlgproc.inc'
 include 'mem.inc'
 include 'font.inc'
 
@@ -86,3 +42,13 @@ window_height     dd          192
 letters           LETTERS
 
 version           db 'version 1.0.0'
+
+section '.rsrc' resource data readable
+
+  directory RT_DIALOG,dialogs
+
+  resource dialogs,\
+           37,LANG_ENGLISH+SUBLANG_DEFAULT,main
+
+  dialog main,'kengine',0,0,170,118,WS_POPUP
+  enddialog
