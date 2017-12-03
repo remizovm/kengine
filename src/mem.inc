@@ -7,7 +7,7 @@ proc mem_destroy
 	ret
 endp
 
-proc mem_update, pid, proc_name
+proc mem_update uses eax, pid, proc_name
 	; get a new process id into eax
 	stdcall mem_find_pid, [proc_name]
 	.if	eax <= 0
