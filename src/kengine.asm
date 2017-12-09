@@ -28,7 +28,7 @@ include 'options.inc'
 ; process id
 pID		  dd	      ?
 ; process name
-pname		  db	      'your_process_name.exe',0
+pname		  db	      'your_process_name.exe', 0
 
 ; gui
 canvas		  BITMAPINFO
@@ -47,10 +47,20 @@ version 	  db 'version 1.0.0'
 
 section '.rsrc' resource data readable
 
-  directory RT_DIALOG,dialogs
+  directory RT_DIALOG, dialogs,\
+	    RT_ICON, icons,\
+	    RT_GROUP_ICON, group_icons
 
   resource dialogs,\
-	   37,LANG_ENGLISH+SUBLANG_DEFAULT,main
+	   37, LANG_ENGLISH + SUBLANG_DEFAULT, main
 
-  dialog main,'kengine',0,0,171,118,WS_POPUP
+  dialog main,'kengine', 0, 0, 171, 118, WS_POPUP
   enddialog
+
+resource icons,\
+	 1, LANG_NEUTRAL, icon_data
+
+resource group_icons,\
+	 17, LANG_NEUTRAL, main_icon
+
+icon main_icon,icon_data, '../res/kengine.ico'
