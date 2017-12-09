@@ -1,39 +1,39 @@
 struct RGBQUAD
-        rgbBlue     db ?
-        rgbGreen    db ?
-        rgbRed      db ?
-        rgbReserved db ?
+	rgbBlue     db ?
+	rgbGreen    db ?
+	rgbRed	    db ?
+	rgbReserved db ?
 ends
 
 struct BITMAPINFO
-        bmiHeader BITMAPINFOHEADER
-        bmiColors RGBQUAD
+	bmiHeader BITMAPINFOHEADER
+	bmiColors RGBQUAD
 ends
 
 struct PROCESSENTRY32
-        dwSize              dd ?
-        cntUsage            dd 0
-        th32ProcessID       dd ?
-        th32DefaultHeapID   dd 0
-        th32ModuleID        dd 0
-        cntThreads          dd ?
-        th32ParentProcessID dd ?
-        pcPriClassBase      dd ?
-        dwFlags             dd 0
-        szExeFile           db MAX_PATH dup(?)
+	dwSize		    dd ?
+	cntUsage	    dd 0
+	th32ProcessID	    dd ?
+	th32DefaultHeapID   dd 0
+	th32ModuleID	    dd 0
+	cntThreads	    dd ?
+	th32ParentProcessID dd ?
+	pcPriClassBase	    dd ?
+	dwFlags 	    dd 0
+	szExeFile	    db MAX_PATH dup(?)
 ends
 
 struct MODULEENTRY32
-        dwSize        dd ?
-        th32ModuleID  dd ?
-        th32ProcessID dd ?
-        GlblcntUsage  dd ?
-        ProccntUsage  dd ?
-        modBaseAddr   dd ?
-        modBaseSize   dd ?
-        hModule       dd ?
-        szModule      db MAX_MODULE_NAME32+1 dup (?)
-        szExePath     db MAX_PATH dup (?)
+	dwSize	      dd ?
+	th32ModuleID  dd ?
+	th32ProcessID dd ?
+	GlblcntUsage  dd ?
+	ProccntUsage  dd ?
+	modBaseAddr   dd ?
+	modBaseSize   dd ?
+	hModule       dd ?
+	szModule      db MAX_MODULE_NAME32+1 dup (?)
+	szExePath     db MAX_PATH dup (?)
 ends
 
 struct LETTER
@@ -83,4 +83,15 @@ struct LETTERS
  Z LETTER <1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1>,0x7A
  space LETTER <0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0>,0x20
  dot LETTER <0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0>,0x2E
+ends
+
+struct KOPTION
+	Description   db MAX_PATH dup (?)
+	Address       dd ?
+	Payload       db 1024 dup (?)
+	PayloadSize   dd ?
+	OriginalBytes db 1024 dup (?)
+	Key	      dd ?
+	IsApplied     dd 0
+	Type	      dd ?
 ends

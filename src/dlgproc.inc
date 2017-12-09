@@ -7,6 +7,7 @@ proc on_timer_event hwnddlg, timer_id, timer_callback
 		invoke	RedrawWindow, [hwnddlg], 0, 0, RDW_INVALIDATE
 	.elseif [timer_id] = KENGINE_MEM_TIMER_ID
 		stdcall mem_update, [pID], pname
+	.elseif [timer_id] = KENGINE_OPTIONS_TIMER_ID
 	.endif
 	ret
 endp
