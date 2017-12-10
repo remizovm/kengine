@@ -1,5 +1,9 @@
 # Contribution guide
 
+## Issues and pull requests
+
+See [issue template](ISSUE_TEMPLATE.md) and [pr template](PULL_REQUEST_TEMPLATE.md)
+
 ## Branches and commits
 
 Each new branch should contain only one issue to be solved. Fox example, 
