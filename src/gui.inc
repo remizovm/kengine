@@ -34,6 +34,18 @@ endp
 proc gui_draw
 	stdcall gui_draw_rect, 1, 1, 126, 94, KENGINE_COLOR_WHITE
 	stdcall draw_string, version, 10, 10, KENGINE_COLOR_WHITE
+	stdcall gui_draw_game_status
+	ret
+endp
+
+; indicates if the game process is found or not by checking the pID variable
+proc gui_draw_game_status
+	stdcall draw_string, "game:", 10, 83, KENGINE_COLOR_WHITE
+	.if [pID]
+		stdcall draw_string, "running", 40, 83, KENGINE_COLOR_WHITE
+	.else
+		stdcall draw_string, "not running", 40, 83, KENGINE_COLOR_WHITE
+	.endif
 	ret
 endp
 
