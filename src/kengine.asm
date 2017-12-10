@@ -43,7 +43,7 @@ window_height	  dd	      192
 
 letters 	  LETTERS
 
-version 	  db 'version 1.0.0'
+version 	  db	      'version 1.0.0', 0
 
 section '.rsrc' resource data readable
 
